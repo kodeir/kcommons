@@ -10,12 +10,8 @@ public class DefaultDatabase implements Database{
 
     private static final Logger logger = new KLogger(DefaultDatabase.class.getName());
 
-    private Connection connection = null;
-    private Statement statement = null;
-
-    public DefaultDatabase(String dbUrl, String user, String password){
-        setConnection(dbUrl, user, password);
-    }
+    protected Connection connection = null;
+    protected Statement statement = null;
 
     @Override
     public boolean setConnection(String dbUrl, String user, String password) {
@@ -120,7 +116,7 @@ public class DefaultDatabase implements Database{
         }
     }
 
-    private boolean printSqlException(SQLException e, String message){
+    protected boolean printSqlException(SQLException e, String message){
         logger.log(Level.SEVERE, message
                         + "\n"
                         + "Error code: " + e.getErrorCode()
