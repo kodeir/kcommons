@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class KIOWorker {
 
-    private static final Logger logger = Logger.getLogger(KLogger.class.getName());
+    private static final Logger logger = Logger.getLogger(KIOWorker.class.getName());
 
     public static String readFromInput(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
