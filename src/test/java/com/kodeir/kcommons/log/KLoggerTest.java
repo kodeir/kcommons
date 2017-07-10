@@ -1,9 +1,7 @@
 package com.kodeir.kcommons.log;
 
 import com.kodeir.kcommons.files.KFileWorker;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -14,25 +12,22 @@ import static org.junit.Assert.*;
 
 public class KLoggerTest {
 
-    private static String testLogDirectory = "."+ File.separator+"testDir";
+    private static String testLogDirectory = "."+ File.separator+"testDir"+File.separator;
+    private static String defaultLogDirectory = "."+ File.separator+"logs"+File.separator;
     private String testLogName = "testName";
     private String logFileEnding = ".0.log";
 
-    @Before
-    public void setUp() throws Exception {
-        KFileWorker.createDir(testLogDirectory);
-    }
-
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
         KFileWorker.deleteDirRecursively(testLogDirectory);
+        KFileWorker.deleteDirRecursively(defaultLogDirectory);
     }
 
     @Test
     public void testConstructor_Name() throws Exception {
         KLogger logger = new KLogger(testLogName);
         logger.closeHandlers();
-        assertTrue(Files.exists(Paths.get(testLogDirectory + testLogName + logFileEnding)));
+        assertTrue(Files.exists(Paths.get( defaultLogDirectory + testLogName + logFileEnding)));
     }
 
     @Test
