@@ -1,7 +1,6 @@
 package com.kodeir.kcommons.files;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Test;
 
 import java.io.File;
