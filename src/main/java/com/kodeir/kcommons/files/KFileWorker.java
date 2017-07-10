@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class KFileWorker {
 
-    private static final Logger logger = Logger.getLogger(KLogger.class.getName());
+    private static final Logger logger = Logger.getLogger(KFileWorker.class.getName());
 
     public static boolean checkExists(String path) {
         return Files.exists(Paths.get(path));
