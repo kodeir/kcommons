@@ -16,8 +16,23 @@ public class KLogger extends Logger{
         this(name, fileSize, filesCount, path, Level.INFO, Level.INFO);
     }
 
+    /**
+     *
+     * @param name
+     * @param fileSize int
+     * @param filesCount restricted to 127 (byte)
+     * @param path
+     * @param fileLevel
+     * @param consoleLevel
+     */
     public KLogger(String name, int fileSize, byte filesCount, String path, Level fileLevel, Level consoleLevel){
         super(name, null);
+        if (fileSize < 1){
+            fileSize = 1;
+        }
+        if (filesCount < 1){
+            filesCount = 1;
+        }
         if (checkPath(path)){
             setLogger(name, fileSize, filesCount, path, fileLevel, consoleLevel);
         } else {
