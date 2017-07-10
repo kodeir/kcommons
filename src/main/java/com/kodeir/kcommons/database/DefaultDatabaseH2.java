@@ -1,39 +1,32 @@
 package com.kodeir.kcommons.database;
 
-import java.io.File;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DefaultDatabaseH2 extends DefaultDatabase implements DatabaseH2 {
 
-    private String dbUrl = "jdbc:h2:."+File.separator+"data"+ File.separator;
-    private String dbUrlCrypt = ";CIPHER=AES";
-    private String dbUrlExists = ";IFEXISTS=TRUE";
+    private String h2Url = "jdbc:h2:";
+    private String h2UrlCrypt = ";CIPHER=";
+    private String h2UrlExists = ";IFEXISTS=TRUE";
 
     @Override
-    public boolean setConnectionIfDbExist(String database, String user, String password) {
+    public boolean setConnectionIfDbExist(String database, String user, String password, boolean exists, String encryption) {
         try {
-            connection = DriverManager.getConnection(dbUrl + database + dbUrlCrypt + dbUrlExists, user, password);
+            String url;
+            if (encryption.equals("")){
+                url = h2Url + database;
+            } else {
+                url = h2Url + database + h2UrlCrypt + encryption;
+            }
+            if (exists) {
+                connection = DriverManager.getConnection(url + h2UrlExists, user, password);
+            } else {
+                connection = DriverManager.getConnection(url, user, password);
+            }
             return true;
         } catch (SQLException e) {
-            catchSqlE(e, database, user);
+            printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
             return false;
         }
-    }
-
-    @Override
-    public boolean setConnection(String database, String user, String password){
-        try {
-            connection = DriverManager.getConnection(dbUrl + database + dbUrlCrypt, user, password);
-            return true;
-        } catch (SQLException e) {
-            catchSqlE(e, database, user);
-            return false;
-        }
-    }
-
-    private void catchSqlE(SQLException e, String database, String user){
-        System.out.println(e.getMessage());
-        printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
     }
 }
