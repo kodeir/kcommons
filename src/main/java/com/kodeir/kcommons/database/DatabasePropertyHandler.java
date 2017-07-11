@@ -1,29 +1,27 @@
 package com.kodeir.kcommons.database;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class KPropertyHandler {
+public class DatabasePropertyHandler {
 
-    private static KPropertyHandler instance = null;
+    private static DatabasePropertyHandler instance = null;
 
     private Properties properties = null;
 
-    private String path = "."+ File.separator+"config"+ File.separator+"database.properties";
+    private final String path = "/config/database.properties";
 
-    public static KPropertyHandler getInstance() {
+    public static DatabasePropertyHandler getInstance() {
         if (instance == null){
-            instance = new KPropertyHandler();
+            instance = new DatabasePropertyHandler();
         }
         return instance;
     }
 
-    private KPropertyHandler() {
+    private DatabasePropertyHandler() {
         properties = new Properties();
         try {
-            properties.load(new FileInputStream(path));
+            properties.load(DatabasePropertyHandler.class.getResourceAsStream(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
