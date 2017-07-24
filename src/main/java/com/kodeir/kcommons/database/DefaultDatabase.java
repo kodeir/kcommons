@@ -10,8 +10,8 @@ public class DefaultDatabase implements Database{
 
     private static final Logger logger = new KLogger(DefaultDatabase.class.getName());
 
-    protected Connection connection = null;
-    protected Statement statement = null;
+    Connection connection = null;
+    private Statement statement = null;
 
     @Override
     public boolean setConnection(String dbUrl, String user, String password) {

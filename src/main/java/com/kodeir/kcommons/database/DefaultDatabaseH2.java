@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 public class DefaultDatabaseH2 extends DefaultDatabase implements DatabaseH2 {
 
-    private String h2Url = "jdbc:h2:";
-    private String h2UrlCrypt = ";CIPHER=";
-    private String h2UrlExists = ";IFEXISTS=TRUE";
+    private final String h2Url = "jdbc:h2:";
+    private final String h2UrlCrypt = ";CIPHER=";
+    private final String h2UrlExists = ";IFEXISTS=TRUE";
 
     @Override
     public boolean setConnectionIfDbExist(String database, String user, String password, boolean exists, String encryption) {
